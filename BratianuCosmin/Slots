@@ -1,0 +1,103 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace Pacanele
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            cashL.Content = (Convert.ToInt32(cashL.Content) + Convert.ToInt32(win.Content)).ToString();
+            win.Content = "0";
+            if (Convert.ToInt32(cashL.Content) >= Convert.ToInt32(bet.Content))
+            {
+              
+                cashL.Content = (Convert.ToInt32(cashL.Content) - Convert.ToInt32(bet.Content)).ToString();
+                //win.Content = "Payed";
+                Random r = new Random();
+                x1_label.Content = r.Next(8).ToString();
+                x2_label.Content = r.Next(8).ToString();
+                x3_label.Content = r.Next(8).ToString();
+                
+                image1.Source = new BitmapImage(new Uri(@"C:\Users\ro146075\Desktop\sprites\" + x1_label.Content.ToString() + ".jpg"));
+                
+                image2.Source = new BitmapImage(
+  new Uri(@"C:\Users\ro146075\Desktop\sprites\" + x2_label.Content.ToString() + ".jpg"));
+                image3.Source = new BitmapImage(
+        new Uri(@"C:\Users\ro146075\Desktop\sprites\" + x3_label.Content.ToString() + ".jpg"));
+                if (x1_label.Content.ToString() == x3_label.Content.ToString())
+                {
+                    int _win = Convert.ToInt32(bet.Content.ToString()) * 3;
+                    win.Content = _win.ToString();
+                    if (x2_label.Content.ToString() == x3_label.Content.ToString())
+                    {
+                        int _win2 = Convert.ToInt32(bet.Content.ToString()) * 10;
+                        win.Content = _win2.ToString();
+                        if (x3_label.Content.ToString() == 7.ToString())
+                        {
+                            int _win3 = Convert.ToInt32(bet.Content.ToString()) * 100;
+                            win.Content = _win3.ToString();
+                        }
+                    }
+                }
+            }
+          
+           
+          
+        }
+
+        private void red_Click(object sender, RoutedEventArgs e)
+        {
+            int _win = Convert.ToInt32(win.Content.ToString()) * 2;
+           
+            Random r = new Random();
+            int won = r.Next(2);
+            if(won == 1)
+            {
+                win.Content = _win.ToString();
+            }
+            else
+                win.Content = "0";
+        }
+
+        private void black_Click(object sender, RoutedEventArgs e)
+        {
+            int _win = Convert.ToInt32(win.Content.ToString()) * 2;
+
+            Random r = new Random();
+            int won = r.Next(2);
+            if (won == 1)
+            {
+                win.Content = _win.ToString();
+            }
+            else
+                win.Content = "0";
+
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            bet.Content = Convert.ToInt32(bet.Content) + 10;
+        }
+    }
+}
