@@ -1,0 +1,80 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace slots
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            Random random = new Random();
+            int r1 = random.Next(0, 3);
+            int r2 = random.Next(0, 3);
+            int r3 = random.Next(0, 3);
+
+            label1.Content = r1;
+            label2.Content = r2;
+            label3.Content = r3;
+            check();
+        }
+        private void check()
+        {
+            int a = Convert.ToInt32(label1.Content.ToString());
+            int b = Convert.ToInt32(label2.Content.ToString());
+            int c = Convert.ToInt32(label3.Content.ToString());
+
+            if (a == b)
+            {
+                if (b == c)
+                {
+                    if (a == c)
+                    {
+                        won.Content = "YOU WON JACKPOT";
+                    }
+                }
+                   
+            }
+            else
+            if (b == c)
+            {
+                won.Content = "YOU WON";
+            }
+            else
+            if (a == c)
+            {
+                won.Content = "YOU WON";
+            }
+            else
+                won.Content = "TRY AGAIN";
+
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            label1.Content = "Try\nyour\nluck";
+            label2.Content = "Try\nyour\nluck";
+            label3.Content = "Try\nyour\nluck";
+
+
+        }
+    }
+}
